@@ -16,6 +16,8 @@ class CreateTimeTable extends Migration
         Schema::create('time', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+            $table->dateTime('start_time')->nullable();
+            $table->dateTime('end_time')->nullable();
             $table->integer('user_id');
             $table->integer('task_id');
             $table->integer('time');

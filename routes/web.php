@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ClientController;
 use Illuminate\Foundation\Application;
+use Illuminate\Routing\Router;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -25,6 +26,10 @@ Route::get('/', function () {
     ]);
 });
 
-Route::middleware(['auth:sanctum', 'verified'])->post('/create-client', [ClientController::class, 'store'])->name('create-client');
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', [ClientController::class, 'index'])->name('dashboard');
+
+Route::middleware(['auth:sanctum', 'verified'])->group(function(Router $router){
+  $router->post('/create-client', [ClientController::class, 'store'])->name('create-client');
+  $router->get('/dashboard', [ClientController::class, 'index'])->name('dashboard');
+  $router->get('/clients/{id}', [ClientController::class, 'view'])->name('view-client');
+});

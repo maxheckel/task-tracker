@@ -20,6 +20,10 @@ class CreateTasksTable extends Migration
             $table->integer('user_id');
             $table->integer('client_id');
             $table->string('name');
+            $table->text('description')->nullable();
+            $table->float('rate');
+            $table->string('currency');
+
 
         });
     }

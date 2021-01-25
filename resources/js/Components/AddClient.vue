@@ -7,7 +7,7 @@
         bg-white
         border
         border-gray-200
-        w-40
+        w-full
         m-1
         text-center
         text-gray-400
@@ -195,7 +195,7 @@
         },
         data() {
             return {
-                adding: true,
+                adding: false,
                 newClient: {
                     'name': null,
                     'rate': null,

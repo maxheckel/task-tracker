@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="grid grid-cols-5 gap-4 p-2">
         <client v-for="client in clients" v-bind:client="client" v-bind:key="client.id"/>
         <add-client/>
     </div>

@@ -7,6 +7,7 @@ module.exports = {
         './storage/framework/views/*.php',
         './resources/views/**/*.blade.php',
         './resources/js/**/*.vue',
+
     ],
     theme: {
         extend: {
@@ -15,7 +16,7 @@ module.exports = {
                     200:"#33534b",
                     100:"#60938B",
                 },
-                "ash-grey": {
+                "ash-gray": {
                     200: "#a5ae9e",
                     100: "#DBE4D3"
                 },
@@ -35,5 +36,5 @@ module.exports = {
         },
     },
 
-    plugins: [require('@tailwindcss/forms'), require('@tailwindcss/typography')],
+    plugins: [require('@tailwindcss/forms'), require('@tailwindcss/typography'),     '~/plugins/v-tailwind-picker'],
 };

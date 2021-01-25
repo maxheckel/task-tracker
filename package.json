@@ -29,6 +29,8 @@
         "vue-template-compiler": "^2.6.10"
     },
     "dependencies": {
-        "@inertiajs/progress": "^0.2.4"
+        "@inertiajs/progress": "^0.2.4",
+        "dayjs": "^1.10.4",
+        "vue-tailwind-picker": "^1.1.6"
     }
 }

@@ -21,4 +21,8 @@ class Client extends Model
         'contact_email',
         'contact_phone'
     ];
+
+    public function tasks(){
+        return $this->hasMany(Task::class);
+    }
 }
