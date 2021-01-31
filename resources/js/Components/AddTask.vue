@@ -16,7 +16,7 @@
                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-dark-slate-gray-200 focus:ring focus:ring-dark-slate-gray-200 focus:ring-opacity-50"
                       placeholder="Replacing the whole transmission"></textarea>
         </label>
-        <div class="text-medium-carmine" v-if="$page.props.errors.name">{{ $page.props.errors.name }}</div>
+        <div class="text-medium-carmine" v-if="$page.props.errors.description">{{ $page.props.errors.description }}</div>
 
         <label for="rate" class="mt-2 block text-gray-700">Rate Per Hour <span class="text-xs text-medium-carmine">*</span></label>
         <div class="mt-1 relative rounded-md shadow-sm">
@@ -52,16 +52,19 @@
                     :init="false"
                     :date-range="true"
                     :inline="true"
+                    style="width: 100%"
                     @change="(v) => newTask.start_date = v">
                     <input v-model="newTask.start_date" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-dark-slate-gray-200 focus:ring focus:ring-dark-slate-gray-200 focus:ring-opacity-50" style="display:none">
                 </VueTailWindPicker>
             </label>
+            <div class="text-medium-carmine" v-if="$page.props.errors.start_date">{{ $page.props.errors.start_date }}</div>
             <label class="block mt-2">
                 <span class="text-gray-700">How many hours did you work on {{newTask.name ? newTask.name : 'this task'}}? <span class="text-xs text-medium-carmine">*</span></span>
                 <input v-model="newTask.time" type="number"
                           class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-dark-slate-gray-200 focus:ring focus:ring-dark-slate-gray-200 focus:ring-opacity-50"
                           placeholder="0.0">
             </label>
+            <div class="text-medium-carmine" v-if="$page.props.errors.time">{{ $page.props.errors.time }}</div>
 
         </div>
 
@@ -79,16 +82,18 @@
     export default {
         components: { VueTailWindPicker: () => import('vue-tailwind-picker'), },
         name: "AddTask",
-        props: ['client', 'submitText', 'logNow'],
+        props: ['client', 'submitText', 'logNow', 'errors'],
         data(){
             return{
                 newTask: {
+                    'logNow': this.logNow,
                     'name': null,
                     'rate': this.client.rate,
                     'description': null,
                     'currency': this.client.currency,
                     'time': null,
-                    'start_date': null
+                    'start_date': null,
+                    'client_id': this.client.id
                 }
             }
         },
@@ -98,7 +103,11 @@
                 this.newTask.start_date = startDate
             },
             submit(){
-
+                this.$inertia.post('/create-task', this.newTask).then((data) => {
+                    if(Object.keys(this.$page.props.errors).length === 0){
+                        this.adding = false;
+                    }
+                })
             }
         }
     }

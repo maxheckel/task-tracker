@@ -18,12 +18,13 @@ class CreateTimeTable extends Migration
             $table->timestamps();
             $table->dateTime('start_time')->nullable();
             $table->dateTime('end_time')->nullable();
+            $table->boolean('is_running')->default(false);
             $table->integer('user_id');
             $table->integer('task_id');
             $table->integer('time');
             $table->boolean('billable');
-            $table->boolean('was_billed');
-            $table->integer('invoice_id');
+            $table->boolean('was_billed')->default(false);
+            $table->integer('invoice_id')->nullable();
         });
     }
 

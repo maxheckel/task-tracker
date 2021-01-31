@@ -3,14 +3,11 @@
         <template #header>
             <div class="flex items-center justify-between">
                 <h2 class="text-gray-800 leading-tight">
-                    <span class="block font-semibold text-xl "> {{clientAcronym}}</span>
+                    <client-acronym :client="client"/>
                     <span class="text-md">{{client.name}}</span>
                 </h2>
                 <div class="order-last">
-                    0 Hours
-                    <span class="block">
-                        <currency amount="0" :currency="client.currency"/> Earned
-                    </span>
+                  <header-billed :client="client"/>
                 </div>
             </div>
         </template>
@@ -40,7 +37,7 @@
 
             <transition name="fade">
                 <div v-show="showStartingNow" class="py-10">
-                    <div class="max-w-3xl mx-auto sm:px-6 lg:px-8">
+                    <div class="max-w-lg mx-auto sm:px-6 lg:px-8">
                         <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg p-4">
                             <h1 class="text-3xl text-center">
                                 Great, let's get to work!
@@ -53,7 +50,7 @@
             </transition>
             <transition name="fade">
                 <div v-show="showPastWork" class="py-10">
-                    <div class="max-w-3xl mx-auto sm:px-6 lg:px-8">
+                    <div class="max-w-lg mx-auto sm:px-6 lg:px-8">
                         <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg p-4">
                             <h1 class="text-3xl text-center">
                                 I'm sure you crushed it!
@@ -75,6 +72,8 @@
     import AppLayout from "@/Layouts/AppLayout";
     import Currency from "@/Components/Currency";
     import AddTask from "@/Components/AddTask";
+    import HeaderBilled from "@/Components/HeaderBilled";
+    import ClientAcronym from "@/Components/ClientAcronym";
 
     export default {
         props: [
@@ -118,6 +117,8 @@
             }, 3000)
         },
         components: {
+            ClientAcronym,
+            HeaderBilled,
             AddTask,
             Currency,
             AppLayout

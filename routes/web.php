@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\ClientController;
+use App\Http\Controllers\TaskController;
+use App\Http\Controllers\TimeController;
 use Illuminate\Foundation\Application;
 use Illuminate\Routing\Router;
 use Illuminate\Support\Facades\Route;
@@ -32,4 +34,12 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function(Router $router){
   $router->post('/create-client', [ClientController::class, 'store'])->name('create-client');
   $router->get('/dashboard', [ClientController::class, 'index'])->name('dashboard');
   $router->get('/clients/{id}', [ClientController::class, 'view'])->name('view-client');
+  $router->post('/create-task', [TaskController::class, 'store'])->name('create-task');
+  $router->get('/task/{id}/log', [TimeController::class, 'show'])->name('log-time');
+});
+
+
+
+Route::middleware(['auth:sanctum', 'verified'])->prefix('local')->group(function(Router $router){
+    $router->get('/client/{clientId}/billed', [ClientController::class, 'billed']);
 });

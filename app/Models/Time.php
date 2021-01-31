@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Time extends Model
 {
     use HasFactory;
+    public $table = 'time';
 
     public function user(){
         return $this->belongsTo(User::class);
